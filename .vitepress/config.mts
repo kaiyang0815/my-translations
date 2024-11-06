@@ -18,7 +18,7 @@ export default defineConfig({
     nav: [
       { text: "首页", link: "/" },
       {
-        text: "文档翻译",
+        text: "文档",
         items: [
           { text: "Swift", link: "/zh/docs/Swift" },
           { text: "SwiftUI", link: "/zh/docs/SwiftUI" },
@@ -26,7 +26,16 @@ export default defineConfig({
         ],
       },
       {
-        text: "文章翻译",
+        text: "书本",
+        items: [
+          {
+            text: "Refactoring UI",
+            link: "/zh/books/refactoring-ui",
+          },
+        ],
+      },
+      {
+        text: "文章",
         items: [{ text: "iOS相关", link: "/zh/articles/ios" }],
       },
     ],
@@ -44,6 +53,7 @@ export default defineConfig({
             { text: "集合类型", link: "/zh/docs/Swift/collection-types" },
             { text: "控制流", link: "/zh/docs/Swift/control-flow" },
             { text: "函数", link: "/zh/docs/Swift/functions" },
+            { text: "闭包", link: "/zh/docs/Swift/closures" },
           ],
         },
       ],
@@ -51,6 +61,13 @@ export default defineConfig({
       "/zh/docs/SwiftData": [],
       "/zh/docs/SwiftTesting": [],
       "/zh/docs/Xcode": [],
+      "/zh/books/refactoring-ui": [
+        {
+          text: "Refactoring UI",
+          collapsed: false,
+          items: [{ text: "从零开始", link: "/zh/books/refactoring-ui/starting-from-scratch" }],
+        },
+      ],
     },
     search: {
       provider: "local",
