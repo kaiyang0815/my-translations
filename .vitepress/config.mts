@@ -3,7 +3,8 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   lang: "zh-CN",
   title: "Kai yang 的翻译合集",
-  description: "本站存放了本人在学习iOS开发过程中，阅读的英文技术文章和官方文档的译文，同时也作为自己学习时的笔记。",
+  description:
+    "本站存放了本人在学习iOS开发过程中，阅读的英文技术文章和官方文档的译文，同时也作为自己学习时的笔记。",
   sitemap: {
     hostname: "https://docs.kaiyang.xyz",
   },
@@ -23,6 +24,7 @@ export default defineConfig({
           { text: "Swift", link: "/zh/docs/Swift" },
           { text: "SwiftUI", link: "/zh/docs/SwiftUI" },
           { text: "SwiftData", link: "/zh/docs/SwiftData" },
+          { text: "UIKit", link: "/zh/docs/UIKit" },
         ],
       },
       {
@@ -49,7 +51,10 @@ export default defineConfig({
             { text: "Swift 之旅", link: "/zh/docs/Swift/a-swift-tour" },
             { text: "基础知识", link: "/zh/docs/Swift/the-basics" },
             { text: "基础操作", link: "/zh/docs/Swift/basic-operators" },
-            { text: "字符串与字符", link: "/zh/docs/Swift/strings-and-characters" },
+            {
+              text: "字符串与字符",
+              link: "/zh/docs/Swift/strings-and-characters",
+            },
             { text: "集合类型", link: "/zh/docs/Swift/collection-types" },
             { text: "控制流", link: "/zh/docs/Swift/control-flow" },
             { text: "函数", link: "/zh/docs/Swift/functions" },
@@ -57,7 +62,18 @@ export default defineConfig({
           ],
         },
       ],
-      "/zh/docs/SwiftUI/": [],
+      "/zh/docs/SwiftUI/": [
+        {
+          text: "SwiftUI",
+          collapsed: false,
+          items: [
+            {
+              text: "Views",
+              link: "/zh/docs/SwiftUI/views/view-styles",
+            },
+          ],
+        },
+      ],
       "/zh/docs/SwiftData": [],
       "/zh/docs/SwiftTesting": [],
       "/zh/docs/Xcode": [],
@@ -65,7 +81,12 @@ export default defineConfig({
         {
           text: "Refactoring UI",
           collapsed: false,
-          items: [{ text: "从零开始", link: "/zh/books/refactoring-ui/starting-from-scratch" }],
+          items: [
+            {
+              text: "从零开始",
+              link: "/zh/books/refactoring-ui/starting-from-scratch",
+            },
+          ],
         },
       ],
     },
@@ -94,12 +115,16 @@ export default defineConfig({
     },
     outline: "deep",
     editLink: {
-      pattern: "https://github.com/kaiyang0815/my-doc-translations/blob/main/:path",
+      pattern:
+        "https://github.com/kaiyang0815/my-doc-translations/blob/main/:path",
       text: "在 GitHub 上编辑此页面",
     },
     socialLinks: [
       { icon: "x", link: "..." },
-      { icon: "github", link: "https://github.com/kaiyang0815/my-doc-translations" },
+      {
+        icon: "github",
+        link: "https://github.com/kaiyang0815/my-doc-translations",
+      },
     ],
     lastUpdated: {
       text: "最后更新于",
