@@ -68,7 +68,11 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              text: "Views",
+              text: "View fundamentals",
+              link: "/zh/docs/SwiftUI/views/view-fundamentals",
+            },
+            {
+              text: "View styles",
               link: "/zh/docs/SwiftUI/views/view-styles",
             },
           ],

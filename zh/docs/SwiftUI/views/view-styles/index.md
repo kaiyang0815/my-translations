@@ -81,7 +81,18 @@ The properties of a button.
 #### `protocol PrimitiveButtonStyle`
 
 A type that applies custom interaction behavior and a custom appearance to all buttons within a view hierarchy.
+
 将自定义交互行为和自定义外观应用于视图层次结构中的所有按钮的类型。
+
+```swift
+@MainActor @preconcurrency
+protocol PrimitiveButtonStyle
+```
+
+Overview 概述
+To configure the current button style for a view hierarchy, use the `buttonStyle(\_:)` modifier. Specify a style that conforms to PrimitiveButtonStyle to create a button with custom interaction behavior. To create a button with the standard button interaction behavior defined for each platform, use ButtonStyle instead.
+
+要为视图层次结构配置当前按钮样式，请使用按钮`buttonStyle(\_:)`修饰符。指定符合 PrimitiveButtonStyle 的样式，以创建具有自定义交互行为的按钮。要创建具有为每个平台定义的标准按钮交互行为的按钮，请改用 ButtonStyle。
 
 #### `struct PrimitiveButtonStyleConfiguration`
 
