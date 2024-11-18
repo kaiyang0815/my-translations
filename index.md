@@ -14,11 +14,11 @@ features:
   - icon:
       src: /images/icons/typescript.png
     title: Typescript
-    details: "Typescript 是 Javscript 的超集"
+    details: "Typescript 是 Javscript 的超集。"
   - icon:
       src: /images/icons/nextjs.jpeg
     title: Next.js
-    details: ""
+    details: "Next.js是一款流行的React.js应用开发框架。"
   # - icon:
   #     src: /images/icons/swift.png
   #   title: Swift
