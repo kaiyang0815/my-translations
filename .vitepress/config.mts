@@ -21,14 +21,14 @@ export default defineConfig({
       {
         text: "文档",
         items: [
-          {
-            text: "Typescript",
-            link: "/zh/docs/Typescript"
-          }
-          // { text: "Swift", link: "/zh/docs/Swift" },
-          // { text: "SwiftUI", link: "/zh/docs/SwiftUI" },
-          // { text: "SwiftData", link: "/zh/docs/SwiftData" },
-          // { text: "UIKit", link: "/zh/docs/UIKit" },
+          // {
+          //   text: "Typescript",
+          //   link: "/zh/docs/Typescript"
+          // },
+          { text: "Swift", link: "/zh/docs/Swift" },
+          { text: "SwiftUI", link: "/zh/docs/SwiftUI" },
+          { text: "SwiftData", link: "/zh/docs/SwiftData" },
+          { text: "UIKit", link: "/zh/docs/UIKit" },
         ],
       },
       {
@@ -40,10 +40,10 @@ export default defineConfig({
           },
         ],
       },
-      // {
-      //   text: "文章",
-      //   items: [{ text: "iOS相关", link: "/zh/articles/ios" }],
-      // },
+      {
+        text: "文章",
+        items: [{ text: "iOS相关", link: "/zh/articles/ios" }],
+      },
     ],
     sidebar: {
       "/zh/docs/Swift/": [
