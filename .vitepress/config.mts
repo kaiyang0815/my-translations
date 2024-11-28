@@ -63,6 +63,7 @@ export default defineConfig({
             { text: "控制流", link: "/zh/docs/Swift/control-flow" },
             { text: "函数", link: "/zh/docs/Swift/functions" },
             { text: "闭包", link: "/zh/docs/Swift/closures" },
+            { text: "枚举", link: "/zh/docs/Swift/enumerations" },
           ],
         },
       ],
