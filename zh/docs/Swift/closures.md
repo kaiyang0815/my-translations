@@ -50,7 +50,7 @@ let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
 
 ```swift
 func backward(_ s1: String, _ s2: String) -> Bool {
-return s1 > s2
+    return s1 > s2
 }
 var reversedNames = names.sorted(by: backward)
 // reversedNames is equal to ["Ewa", "Daniella", "Chris", "Barry", "Alex"]
@@ -66,7 +66,7 @@ var reversedNames = names.sorted(by: backward)
 
 ```swift
 { (<#parameters#>) -> <#return type#> in
-<#statements#>
+    <#statements#>
 }
 ```
 
@@ -76,58 +76,58 @@ var reversedNames = names.sorted(by: backward)
 
 ```swift
 reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in
-  return s1 > s2
+    return s1 > s2
 })
 ```
 
-请注意，此内联闭包的参数和返回类型的声明与 backward(_: _:)函数的声明相同。在这两种情况下，它都写为 (s1: String, s2: String) -> Bool 。但是，对于内联闭包表达式，参数和返回类型写在花括号内，而不是写在花括号外。
+请注意，此内联闭包的参数和返回类型的声明与 `backward(_: _:)`函数的声明相同。在这两种情况下，它都写为 `(s1: String, s2: String) -> Bool`。但是，对于内联闭包表达式，参数和返回类型写在花括号内，而不是写在花括号外。
 
-闭包主体的开头由 in 关键字引入。该关键字表示闭包的参数和返回类型的定义已经完成，闭包的主体即将开始。
+闭包主体的开头由 `in` 关键字引入。该关键字表示闭包的参数和返回类型的定义已经完成，闭包的主体即将开始。
 
 因为闭包的主体很短，甚至可以写成一行：
 
 ```swift
-reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 > s2 } )
+reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 > s2 })
 ```
 
-这说明对 sorted(by:)方法的整体调用保持不变。一对括号仍然包含该方法的整个参数。然而，这个参数现在是一个内联闭包。
+### 从上下文推断类型
 
-## 从上下文推断类型
+因为排序闭包作为参数传递给方法，所以 Swift 可以推断其参数的类型及其返回值的类型。`sorted(by:)` 方法正在字符串数组上调用，因此其参数必须是 `(String, String) -> Bool` 类型的函数。这意味着 `(String, String)` 和 `Bool` 类型不需要编写为闭包表达式定义的一部分。
 
-因为排序闭包作为参数传递给方法，所以 Swift 可以推断其参数的类型及其返回值的类型。 sorted(by:)方法正在字符串数组上调用，因此其参数必须是(String, String) -> Bool 类型的函数。这意味着(String, String)和 Bool 类型不需要编写为闭包表达式定义的一部分。由于可以推断所有类型，因此也可以省略返回箭头 ( -> ) 和参数名称周围的括号：
+由于可以推断所有类型，因此也可以省略返回箭头 (`->`) 和参数名称周围的括号：
 
 ```swift
-reversedNames = names.sorted(by: { s1, s2 in return s1 > s2 } )
+reversedNames = names.sorted(by: { s1, s2 in return s1 > s2 })
 ```
 
-将闭包作为内联闭包表达式传递给函数或方法时，始终可以推断出参数类型和返回类型。因此，当闭包用作函数或方法参数时，您永远不需要以最完整的形式编写内联闭包。
+将闭包作为内联闭包表达式传递给函数或方法时，您始终可以推断出参数类型和返回类型。因此，当闭包用作函数或方法参数时，您永远不需要以最完整的形式编写内联闭包。
 
-尽管如此，如果您愿意，您仍然可以使类型明确，并且如果可以避免代码读者的歧义，我们鼓励这样做。在使用 sorted(by:)方法的情况下，从正在进行排序的事实来看，闭包的目的很清楚，并且读者可以安全地假设闭包可能正在处理 String 值，因为它是协助对字符串数组进行排序。
+尽管如此，如果您愿意，您仍然可以使类型明确，并且如果可以避免代码读者的歧义，我们鼓励这样做。在使用 `sorted(by:)`方法的情况下，从正在进行排序的事实来看，闭包的目的很清楚，并且读者可以安全地假设闭包可能正在处理 String 值，因为它是协助对字符串数组进行排序。
 
 单表达式闭包的隐式返回
-单表达式闭包可以通过省略其声明中的 return 关键字来隐式返回其单个表达式的结果，如上例的此版本所示：
+单表达式闭包可以通过省略其声明中的 `return` 关键字来隐式返回其单个表达式的结果，如上例的此版本所示：
 
 ```swift
-reversedNames = names.sorted(by: { s1, s2 in s1 > s2 } )
+reversedNames = names.sorted(by: { s1, s2 in s1 > s2 })
 ```
 
-这里， `sorted(by:)`方法参数的函数类型清楚地表明闭包必须返回 Bool 值。因为闭包的主体包含一个返回 Bool 值的表达式 ( s1 > s2 )，所以没有歧义，并且可以省略 return 关键字。
+这里， `sorted(by:)`方法参数的函数类型清楚地表明闭包必须返回 Bool 值。因为闭包的主体包含一个返回 Bool 值的表达式 ( s1 > s2 )，所以没有歧义，并且可以省略 `return` 关键字。
 
-## 参数名称简写
+### 参数名称简写
 
-Swift 自动为内联闭包提供简写参数名称，可用于通过名称`$0 、 $1 、 $2` 等引用闭包参数的值。
+Swift 自动为内联闭包提供简写参数名称，可用于通过名称 `$0`、 `$1`、 `$2` 等引用闭包参数的值。
 
-如果在闭包表达式中使用这些速记参数名称，则可以从其定义中省略闭包的参数列表。速记参数名称的类型是从预期的函数类型推断出来的，并且您使用的编号最高的速记参数决定了闭包采用的参数数量。 in 关键字也可以省略，因为闭包表达式完全由其主体组成：
+如果在闭包表达式中使用这些速记参数名称，则可以从其定义中省略闭包的参数列表。速记参数名称的类型是从预期的函数类型推断出来的，并且您使用的编号最高的速记参数决定了闭包采用的参数数量。`in` 关键字也可以省略，因为闭包表达式完全由其主体组成：
 
 ```swift
-reversedNames = names.sorted(by: { $0 > $1 } )
+reversedNames = names.sorted(by: { $0 > $1 })
 ```
 
-这里， $0 和$1 指的是闭包的第一个和第二个 String 参数。因为$1 是编号最大的简写参数，所以闭包被理解为采用两个参数。因为这里的 `sorted(by:)`函数需要一个参数都是字符串的闭包，所以简写参数$0 和$1 都是 String 类型。
+这里， `$0` 和 `$1` 指的是闭包的第一个和第二个 String 参数。因为 `$1` 是编号最大的简写参数，所以闭包被理解为采用两个参数。因为这里的 `sorted(by:)`函数需要一个参数都是字符串的闭包，所以简写参数 `$0` 和 `$1` 都是 String 类型。
 
-## 操作方法
+### 操作方法
 
-实际上还有一种更短的方法来编写上面的闭包表达式。 Swift 的 `String` 类型将其特定于字符串的大于运算符 ( > ) 实现定义为具有两个 String 类型参数并返回 Bool 类型值的方法。这与 sorted(by:)方法所需的方法类型完全匹配。因此，您可以简单地传入大于运算符，Swift 将推断您想要使用其特定于字符串的实现：
+实际上还有一种更短的方法来编写上面的闭包表达式。 Swift 的 `String` 类型将其特定于字符串的大于运算符 (`>`) 实现定义为具有两个 String 类型参数并返回 Bool 类型值的方法。这与 `sorted(by:)`方法所需的方法类型完全匹配。因此，您可以简单地传入大于运算符，Swift 将推断您想要使用其特定于字符串的实现：
 
 ```swift
 reversedNames = names.sorted(by: >)
@@ -135,25 +135,25 @@ reversedNames = names.sorted(by: >)
 
 有关运算符方法的更多信息，请参阅运算符方法。
 
-## 尾随闭包
+### 尾随闭包
 
 如果需要将闭包表达式作为函数的最终参数传递给函数，并且闭包表达式很长，则将其写为尾随闭包可能会很有用。您可以在函数调用的括号后编写尾随闭包，即使尾随闭包仍然是函数的参数。当您使用尾随闭包语法时，您不会将第一个闭包的参数标签写入函数调用的一部分。一个函数调用可以包含多个尾随闭包；但是，下面的前几个示例使用单个尾随闭包。
 
 ```swift
 func someFunctionThatTakesAClosure(closure: () -> Void) {
-// function body goes here
+    // function body goes here
 }
 
 // Here's how you call this function without using a trailing closure:
 
 someFunctionThatTakesAClosure(closure: {
-// closure's body goes here
+    // closure's body goes here
 })
 
 // Here's how you call this function with a trailing closure instead:
 
 someFunctionThatTakesAClosure() {
-// trailing closure's body goes here
+    // trailing closure's body goes here
 }
 ```
 
@@ -163,7 +163,7 @@ someFunctionThatTakesAClosure() {
 reversedNames = names.sorted() { $0 > $1 }
 ```
 
-如果提供闭包表达式作为函数或方法的唯一参数，并且将该表达式作为尾随闭包提供，则在调用函数时无需在函数或方法名称后面编写一对括号() ：
+如果提供闭包表达式作为函数或方法的唯一参数，并且将该表达式作为尾随闭包提供，则在调用函数时无需在函数或方法名称后面编写一对括号 (`()`):
 
 ```swift
 reversedNames = names.sorted { $0 > $1 }
@@ -173,14 +173,12 @@ reversedNames = names.sorted { $0 > $1 }
 
 将提供的闭包应用于每个数组元素后， `map(_:)` 方法返回一个包含所有新映射值的新数组，其顺序与原始数组中对应值的顺序相同。
 
-以下是如何使用带有尾随闭包的 `map(_:)` 方法将 Int 值数组转换为 String 值数组。数组[16, 58, 510]用于创建新数组
+以下是如何使用带有尾随闭包的 `map(_:)` 方法将 Int 值数组转换为 String 值数组。数组 `[16, 58, 510]` 用于创建新数组 `["OneSix", "FiveEight", "FiveOneZero"]`：
 
 ```swift
-["OneSix", "FiveEight", "FiveOneZero"] :
-
 let digitNames = [
-0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four",
-5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine"
+    0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four",
+    5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine"
 ]
 let numbers = [16, 58, 510]
 ```
@@ -191,13 +189,13 @@ let numbers = [16, 58, 510]
 
 ```swift
 let strings = numbers.map { (number) -> String in
-var number = number
-var output = ""
-repeat {
-output = digitNames[number % 10]! + output
-number /= 10
-} while number > 0
-return output
+    var number = number
+    var output = ""
+    repeat {
+        output = digitNames[number % 10]! + output
+        number /= 10
+    } while number > 0
+    return output
 }
 // strings is inferred to be of type [String]
 // its value is ["OneSix", "FiveEight", "FiveOneZero"]
@@ -207,13 +205,13 @@ return output
 
 在此示例中，变量 number 使用闭包的 number 参数的值进行初始化，以便可以在闭包体内修改该值。 （函数和闭包的参数始终是常量。）闭包表达式还指定返回类型 String ，以指示将存储在映射输出数组中的类型。
 
-每次调用闭包表达式时都会构建一个名为 output 的字符串。它使用余数运算符 ( number % 10 ) 计算 number 的最后一位数字，并使用该数字在 digit Names 字典中查找适当的字符串。闭包可用于创建任何大于零的整数的字符串表示形式。
+每次调用闭包表达式时都会构建一个名为 output 的字符串。它使用余数运算符 (`number % 10`) 计算 number 的最后一位数字，并使用该数字在 digit Names 字典中查找适当的字符串。闭包可用于创建任何大于零的整数的字符串表示形式。
 
 > 注意
 >
-> 对 digit Names 字典下标的调用后跟一个感叹号 ( ! )，因为字典下标返回一个可选值，以指示如果键不存在，字典查找可能会失败。在上面的示例中，保证 `number % 10` 始终是 `digit Names` 字典的有效下标键，因此使用感叹号来强制解包存储在下标的可选返回值中的 String 值。
+> 对 digit Names 字典下标的调用后跟一个感叹号 (`!`)，因为字典下标返回一个可选值，以指示如果键不存在，字典查找可能会失败。在上面的示例中，保证 `number % 10` 始终是 `digit Names` 字典的有效下标键，因此使用感叹号来强制解包存储在下标的可选返回值中的 String 值。
 
-从 `digit Names` 字典中检索到的字符串被添加到 output 的前面，有效地反向构建数字的字符串版本。 （表达式 number % 10 为 16 提供值 6 ，为 58 提供 8 ，为 510 提供 0 ）
+从 `digit Names` 字典中检索到的字符串被添加到 output 的前面，有效地反向构建数字的字符串版本。 （表达式 `number % 10` 为 16 提供值 6 ，为 58 提供 8 ，为 510 提供 0 。）
 
 然后将 number 变量除以 10 。因为它是整数，所以在除法过程中会向下舍入，因此 16 变为 1 ， 58 变为 5 ， 510 变为 51 。
 
@@ -225,11 +223,11 @@ return output
 
 ```swift
 func loadPicture(from server: Server, completion: (Picture) -> Void, onFailure: () -> Void) {
-if let picture = download("photo.jpg", from: server) {
-completion(picture)
-} else {
-onFailure()
-}
+    if let picture = download("photo.jpg", from: server) {
+        completion(picture)
+    } else {
+        onFailure()
+    }
 }
 ```
 
@@ -237,9 +235,9 @@ onFailure()
 
 ```swift
 loadPicture(from: someServer) { picture in
-someView.currentPicture = picture
+    someView.currentPicture = picture
 } onFailure: {
-print("Couldn't download the next picture.")
+    print("Couldn't download the next picture.")
 }
 ```
 
@@ -259,16 +257,16 @@ print("Couldn't download the next picture.")
 
 ```swift
 func makeIncrementer(forIncrement amount: Int) -> () -> Int {
-var runningTotal = 0
-func incrementer() -> Int {
-runningTotal += amount
-return runningTotal
-}
-return incrementer
+    var runningTotal = 0
+    func incrementer() -> Int {
+        runningTotal += amount
+        return runningTotal
+    }
+    return incrementer
 }
 ```
 
-`make Incrementer` 的返回类型为() -> Int 。这意味着它返回一个函数，而不是一个简单的值。它返回的函数没有参数，每次调用时都返回一个 Int 值。要了解函数如何返回其他函数，请参阅函数类型作为返回类型。
+`makeIncrementer` 的返回类型为 `() -> Int`。这意味着它返回一个函数，而不是一个简单的值。它返回的函数没有参数，每次调用时都返回一个 Int 值。要了解函数如何返回其他函数，请参阅函数类型作为返回类型。
 
 这 `makeIncrementer(forIncrement:)` 函数定义了一个名为 running Total 整数变量，用于存储将返回的增量器的当前运行总计。该变量的初始化值为 0 。
 
@@ -278,8 +276,8 @@ return incrementer
 
 ```swift
 func incrementer() -> Int {
-runningTotal += amount
-return runningTotal
+    runningTotal += amount
+    return runningTotal
 }
 ```
 
@@ -329,9 +327,9 @@ incrementByTen()
 
 ## 闭包是引用类型
 
-在上面的示例中， `increment By Seven` 和 `increment By Ten` 是常量，但这些常量引用的闭包仍然能够增加它们捕获的 running Total 变量。这是因为函数和闭包是引用类型。
+在上面的示例中， `incrementBySeven` 和 `incrementByTen` 是常量，但这些常量引用的闭包仍然能够增加它们捕获的 running Total 变量。这是因为函数和闭包是引用类型。
 
-每当您将函数或闭包分配给常量或变量时，实际上都是将该常量或变量设置为对该函数或闭包的引用。在上面的示例中， `increment By Ten` 的是闭包的选择，而不是闭包本身的内容。
+每当您将函数或闭包分配给常量或变量时，您实际上都是将该常量或变量设置为对该函数或闭包的引用。在上面的示例中， `incrementByTen` 的是闭包的选择，而不是闭包本身的内容。
 
 这也意味着，如果将一个闭包分配给两个不同的常量或变量，则这两个常量或变量都引用同一个闭包。
 
@@ -344,22 +342,22 @@ incrementByTen()
 // returns a value of 60
 ```
 
-上面的示例显示，调用 `also Increment By Ten` 与调用 `increment By Ten` 相同。因为它们都引用相同的闭包，所以它们都会递增并返回相同的运行总计。
+上面的示例显示，调用 `alsoIncrementByTen` 与调用 `incrementByTen` 相同。因为它们都引用相同的闭包，所以它们都会递增并返回相同的运行总计。
 
 ## 逃离封闭
 
-当闭包作为参数传递给函数时，称为转义函数，但在函数返回后调用。当你声明一个以闭包作为参数之一的函数时，你可以在参数类型之前写`@escaping` ，以表明允许闭包转义。
+当闭包作为参数传递给函数时，称为转义函数，但在函数返回后调用。当你声明一个以闭包作为参数之一的函数时，你可以在参数类型之前写 `@escaping` ，以表明允许闭包转义。
 
 闭包逃逸的一种方法是存储在函数外部定义的变量中。例如，许多启动异步操作的函数都采用闭包参数作为完成处理程序。该函数在开始操作后返回，但在操作完成之前不会调用闭包 - 闭包需要转义，以便稍后调用。例如：
 
 ```swift
 var completionHandlers: [() -> Void] = []
 func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
-completionHandlers.append(completionHandler)
+    completionHandlers.append(completionHandler)
 }
 ```
 
-这 `someFunctionWithEscapingClosure(_:)` 函数采用闭包作为其参数，并将其添加到在函数外部声明的数组中。如果您没有使用`@escaping` 标记此函数的参数，您将收到编译时错误。
+这 `someFunctionWithEscapingClosure(_:)` 函数采用闭包作为其参数，并将其添加到在函数外部声明的数组中。如果您没有使用 `@escaping` 标记此函数的参数，您将收到编译时错误。
 
 如果 `self` 引用类的实例，则需要特别考虑引用 `self` 转义闭包。在逃逸闭包中捕获 `self` 很容易意外地创建强引用循环。有关引用循环的信息，请参阅自动引用计数。
 
@@ -367,15 +365,15 @@ completionHandlers.append(completionHandler)
 
 ```swift
 func someFunctionWithNonescapingClosure(closure: () -> Void) {
-closure()
+    closure()
 }
 
 class SomeClass {
-var x = 10
-func doSomething() {
-someFunctionWithEscapingClosure { self.x = 100 }
-someFunctionWithNonescapingClosure { x = 200 }
-}
+    var x = 10
+    func doSomething() {
+        someFunctionWithEscapingClosure { self.x = 100 }
+        someFunctionWithNonescapingClosure { x = 200 }
+    }
 }
 
 let instance = SomeClass()
@@ -388,15 +386,15 @@ print(instance.x)
 // Prints "100"
 ```
 
-下面是 do Something()的一个版本，它通过将 self ，然后隐式引用 self ：
+下面是 do Something()的一个版本，它通过将 self ，然后隐式引用 self 。
 
 ```swift
 class SomeOtherClass {
-var x = 10
-func doSomething() {
-someFunctionWithEscapingClosure { [self] in x = 100 }
-someFunctionWithNonescapingClosure { x = 200 }
-}
+    var x = 10
+    func doSomething() {
+        someFunctionWithEscapingClosure { [self] in x = 100 }
+        someFunctionWithNonescapingClosure { x = 200 }
+    }
 }
 ```
 
@@ -404,11 +402,11 @@ someFunctionWithNonescapingClosure { x = 200 }
 
 ```swift
 struct SomeStruct {
-var x = 10
-mutating func doSomething() {
-someFunctionWithNonescapingClosure { x = 200 } // Ok
-someFunctionWithEscapingClosure { x = 100 } // Error
-}
+    var x = 10
+    mutating func doSomething() {
+        someFunctionWithNonescapingClosure { x = 200 } // Ok
+        someFunctionWithEscapingClosure { x = 100 } // Error
+    }
 }
 ```
 
@@ -437,25 +435,25 @@ print(customersInLine.count)
 // Prints "4"
 ```
 
-尽管 customers In Line 数组的第一个元素被闭包内的代码删除，但在实际调用闭包之前，该数组元素不会被删除。如果从未调用闭包，则永远不会计算闭包内的表达式，这意味着永远不会删除数组元素。请注意， customer Provider 的类型不是 String 而是() -> String — 一个不带参数、返回字符串的函数。
+尽管 customers In Line 数组的第一个元素被闭包内的代码删除，但在实际调用闭包之前，该数组元素不会被删除。如果从未调用闭包，则永远不会计算闭包内的表达式，这意味着永远不会删除数组元素。请注意， customer Provider 的类型不是 String 而是 `() -> String` — 一个不带参数、返回字符串的函数。
 
 当您将闭包作为参数传递给函数时，您会得到与延迟求值相同的行为。
 
 ```swift
 // customersInLine is ["Alex", "Ewa", "Barry", "Daniella"]
 func serve(customer customerProvider: () -> String) {
-print("Now serving \(customerProvider())!")
+    print("Now serving \(customerProvider())!")
 }
 serve(customer: { customersInLine.remove(at: 0) } )
 // Prints "Now serving Alex!"
 ```
 
-上面清单中的 serve(customer:)函数采用显式闭包来返回客户的姓名。下面的 serve(customer:)版本执行相同的操作，但是它没有采用显式闭包，而是通过使用@autoclosure 属性标记其参数类型来采用自动闭包。现在您可以调用该函数，就像它采用 String 参数而不是闭包一样。该参数会自动转换为闭包，因为 customer Provider 参数的类型是用@autoclosure 属性标记的。
+上面清单中的 serve(customer:)函数采用显式闭包来返回客户的姓名。下面的 serve(customer:)版本执行相同的操作，但是它没有采用显式闭包，而是通过使用 `@autoclosure` 属性标记其参数类型来采用自动闭包。现在您可以调用该函数，就像它采用 String 参数而不是闭包一样。该参数会自动转换为闭包，因为 customer Provider 参数的类型是用 `@autoclosure` 属性标记的。
 
 ```swift
 // customersInLine is ["Ewa", "Barry", "Daniella"]
 func serve(customer customerProvider: @autoclosure () -> String) {
-print("Now serving \(customerProvider())!")
+    print("Now serving \(customerProvider())!")
 }
 serve(customer: customersInLine.remove(at: 0))
 // Prints "Now serving Ewa!"
@@ -465,13 +463,13 @@ serve(customer: customersInLine.remove(at: 0))
 >
 > 过度使用自动闭包会使您的代码难以理解。上下文和函数名称应该清楚地表明评估正在推迟。
 
-如果您想要一个允许转义的自动闭包，请同时使用`@autoclosure` 和`@escaping` 属性。 `@escaping` 属性在上面的 `Escaping Closures` 中进行了描述。
+如果您想要一个允许转义的自动闭包，请同时使用 `@autoclosure` 和 `@escaping` 属性。 `@escaping` 属性在上面的 `Escaping Closures` 中进行了描述。
 
 ```swift
 // customersInLine is ["Barry", "Daniella"]
 var customerProviders: [() -> String] = []
 func collectCustomerProviders(_ customerProvider: @autoclosure @escaping () -> String) {
-customerProviders.append(customerProvider)
+    customerProviders.append(customerProvider)
 }
 collectCustomerProviders(customersInLine.remove(at: 0))
 collectCustomerProviders(customersInLine.remove(at: 0))
@@ -479,10 +477,8 @@ collectCustomerProviders(customersInLine.remove(at: 0))
 print("Collected \(customerProviders.count) closures.")
 // Prints "Collected 2 closures."
 for customerProvider in customerProviders {
-print("Now serving \(customerProvider())!")
+    print("Now serving \(customerProvider())!")
 }
 // Prints "Now serving Barry!"
 // Prints "Now serving Daniella!"
 ```
-
-在上面的代码中， `collectCustomerProviders(_:)`函数不是调用作为 `customer Provider` 参数传递给它的闭包，而是将闭包附加到 `customer Providers` 数组。数组是在函数作用域之外声明的，这意味着数组中的闭包可以在函数返回后执行。因此，必须允许 `customer Provider` 参数的值脱离函数的作用域。
