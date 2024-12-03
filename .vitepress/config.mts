@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
   lang: "zh-CN",
-  title: "Kai yang 的翻译合集",
+  title: "Kaiyang 的翻译合集",
   description:
     "本站存放了本人在学习iOS开发过程中，阅读的英文技术文章和官方文档的译文，同时也作为自己学习时的笔记。",
   sitemap: {
@@ -64,6 +64,10 @@ export default defineConfig({
             { text: "函数", link: "/zh/docs/Swift/functions" },
             { text: "闭包", link: "/zh/docs/Swift/closures" },
             { text: "枚举", link: "/zh/docs/Swift/enumerations" },
+            {
+              text: "结构体和类",
+              link: "/zh/docs/Swift/structures-and-classes",
+            },
           ],
         },
       ],
