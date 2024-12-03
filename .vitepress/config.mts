@@ -51,8 +51,8 @@ export default defineConfig({
           text: "Swift",
           collapsed: false,
           items: [
-            { text: "关于 Swift", link: "/zh/docs/Swift/about-swift" },
             { text: "Swift 之旅", link: "/zh/docs/Swift/a-swift-tour" },
+            { text: "关于 Swift", link: "/zh/docs/Swift/about-swift" },
             { text: "基础知识", link: "/zh/docs/Swift/the-basics" },
             { text: "基础操作", link: "/zh/docs/Swift/basic-operators" },
             {
@@ -136,7 +136,7 @@ export default defineConfig({
       { icon: "x", link: "..." },
       {
         icon: "github",
-        link: "https://github.com/kaiyang0815/my-doc-translations",
+        link: "https://github.com/kaiyang0815/my-translations",
       },
     ],
     lastUpdated: {
